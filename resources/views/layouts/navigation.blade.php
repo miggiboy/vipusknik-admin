@@ -5,11 +5,11 @@
       <a href="{{ route('home') }}" class="item">
         <img src="/images/logo.png" alt="Главная" class="logo">
       </a>
-    
-    
+
+
       <a href="{{ route('institutions.index', 'universities') }}" class="item">Университеты </a>
       <a href="{{ route('institutions.index', 'colleges') }}" class="item">Колледжи </a>
-    
+
       <div class="ui dropdown item">
         Специальности <i class="dropdown icon"></i>
         <div class="menu" style="font-size: 14px;">
@@ -25,15 +25,23 @@
             </a>
         </div>
       </div>
-    
+
       <a href="{{ route('professions.index') }}" class="item">Профессии </a>
       <a href="{{ route('articles.index') }}" class="item">Статьи </a>
-    
+
       <div class="ui dropdown item">
         Предметы <i class="dropdown icon"></i>
         <div class="menu" style="font-size: 14px;">
             <a href="{{ route('subjects.index') }}" class="item">Предметы </a>
             <a href="{{ route('quizzes.index') }}" class="item">Тесты </a>
+        </div>
+      </div>
+
+      <div class="ui dropdown item">
+        Еще <i class="dropdown icon"></i>
+        <div class="menu" style="font-size: 14px;">
+            <a href="{{ route('cities.index') }}" class="item">Города </a>
+        <a href="{{ route('regions.index') }}" class="item">Области </a>
         </div>
       </div>
     @endif
