@@ -37,13 +37,8 @@
         </div>
       </div>
 
-      <div class="ui dropdown item">
-        Еще <i class="dropdown icon"></i>
-        <div class="menu" style="font-size: 14px;">
-            <a href="{{ route('cities.index') }}" class="item">Города </a>
-        <a href="{{ route('regions.index') }}" class="item">Области </a>
-        </div>
-      </div>
+      <a href="{{ route('regions.index') }}" class="item">Города и области </a>
+
     @endif
   <div class="right menu">
 

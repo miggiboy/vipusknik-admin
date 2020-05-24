@@ -28,10 +28,22 @@ class CitiesController extends Controller
     {
         $this->validate(request(), [
             'title' => 'required|unique:cities',
+            'region_id' => 'required'
         ]);
 
-        City::create(request(['title']));
+        City::create(request(['title', 'region_id']));
 
         return back()->with('message', 'Город добавлен успешно');
+    }
+
+    public function update(City $city)
+    {
+        $this->validate(request(), [
+            'region_id' => 'required',
+        ]);
+
+        $city->update(request()->only('region_id'));
+
+        return back()->with('message', 'Город обновлен успешно');
     }
 }

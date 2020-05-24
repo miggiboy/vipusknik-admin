@@ -213,7 +213,7 @@ Route::group(['namespace' => 'Subjects'], function () {
 
 // Cities
 Route::resource('cities', 'CitiesController', [
-    'only' => ['index', 'store', 'destroy']
+    'only' => ['index', 'store', 'destroy', 'update']
 ]);
 
 /**
