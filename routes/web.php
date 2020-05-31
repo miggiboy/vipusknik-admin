@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\User\User;
-
-Route::get('/test', function () {
-    auth()->login(User::first());
-});
+// use App\Models\User\User;
+// 
+// Route::get('/test', function () {
+    // auth()->login(User::first());
+// });
 
 Route::get('/regions', 'RegionsController@index')->name('regions.index');
 Route::post('/regions', 'RegionsController@store')->name('regions.store');

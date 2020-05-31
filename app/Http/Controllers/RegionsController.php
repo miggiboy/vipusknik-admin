@@ -17,9 +17,12 @@ class RegionsController extends Controller
 
     public function store()
     {
-        $this->validate(request(), [ 'name' => 'required' ]);
+        $this->validate(request(), [
+            'name' => 'required',
+            'name_genitive' => 'required'
+        ]);
 
-        Region::create(request()->only('name'));
+        Region::create(request()->only('name', 'name_genitive'));
 
         return redirect()->route('regions.index');
     }

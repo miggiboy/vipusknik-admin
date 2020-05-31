@@ -12,9 +12,10 @@
             <form action="{{ route('regions.store') }}" method="post">
                 {{ csrf_field() }}
 
-                <input type="text" name="name" placeholder="Название">
+                <input type="text" class="block w-1/2" required name="name" placeholder="Название (именительный падеж)">
+                <input type="text" class="block w-1/2" required name="name_genitive" placeholder="Название (родительный падеж)">
 
-                <button type="submit">
+                <button type="submit" class="block">
                     Добавить область
                 </button>
             </form>
@@ -38,7 +39,8 @@
             <form action="{{ route('cities.store') }}" method="post">
                 {{ csrf_field() }}
 
-                <input type="text" name="title" placeholder="Название">
+                <input type="text" name="title" placeholder="Название (именительный падеж)">
+                <input type="text" name="title_coginitive" placeholder="Название (родительный падеж)">
 
                 <select name="region_id">
                     <option value="">Область</option>
@@ -71,9 +73,6 @@
                                 @endforeach
                             </select>
                         </form>
-                        @foreach ($region->cities as $city)
-                            {{ $city->name }}
-                        @endforeach
                     </div>
                 </div>
             @endforeach
