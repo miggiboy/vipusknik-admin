@@ -23,7 +23,7 @@ class SpecialtyFormRequest extends FormRequest
      */
     public function rules()
     {
-        $codeRule = 'nullable|alpha_num|max:255|unique:specialties';
+        $codeRule = 'nullable|max:255|unique:specialties';
 
         /**
          * Do not compare this item's code with itself
