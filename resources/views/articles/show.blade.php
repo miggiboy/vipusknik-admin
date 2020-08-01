@@ -4,6 +4,7 @@
 
 @section ('subnavigation')
     @include ('articles/partials/_navigation', ['heading' => $article->title])
+    <p>Дата редактирования: {{ $article->updated_at }}</p>
 @endsection
 
 @section ('head')

@@ -29,6 +29,7 @@
           <div class="ui grid">
               <div class="fifteen wide column">
                   <h1>{{ $institution->title }}</h1>
+                  <p>Дата редактирования: {{ $institution->updated_at }}</p>
               </div>
 
               <div class="one wide column">

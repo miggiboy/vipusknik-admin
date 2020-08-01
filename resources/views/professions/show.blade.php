@@ -4,6 +4,8 @@
 
 @section ('subnavigation')
     @include('professions/partials/_navigation', ['heading' => $profession->title])
+
+    <p>Дата редактирования: {{ $profession->updated_at }}</p>
 @endsection
 
 @section ('head')

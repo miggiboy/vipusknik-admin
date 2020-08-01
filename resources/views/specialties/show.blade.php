@@ -11,6 +11,7 @@
             <div class="ui grid">
                 <div class="fifteen wide column">
                     <h1>{{ $specialty->title }}</h1>
+                    <p>Дата редактирования: {{ $specialty->updated_at }}</p>
                 </div>
                 <div class="one wide column">
                     @include ('specialties/partials/_options')
