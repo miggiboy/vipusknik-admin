@@ -20,8 +20,11 @@
               Колледжей
             </a>
             <div class="ui divider"></div>
-            <a href="{{ route('qualifications.index') }}" title="Квалификации колледжей" class="item">
-              Квалификации
+            <a href="{{ route('qualifications.index', [ 'institution_type' => 'university' ]) }}" title="Квалификации колледжей" class="item">
+              Квалификации универстетов
+            </a>
+            <a href="{{ route('qualifications.index', [ 'institution_type' => 'college' ]) }}" title="Квалификации колледжей" class="item">
+              Квалификации колледжей
             </a>
         </div>
       </div>

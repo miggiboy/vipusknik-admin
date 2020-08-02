@@ -25,6 +25,25 @@
     </div>
 
     <div class="fields" style="margin-bottom: 17px;">
+        <div class="four wide field">
+            <select class="ui selection search dropdown" name="institution_type">
+              <option value="">Учебное заведение</option>
+              <option value=" ">Не выбрано</option>
+                <option 
+                    value="college"
+                    {{ request()->institution_type == 'college' ? 'selected' : '' }}
+                >
+                  Колледж
+                </option>
+
+                <option
+                    value="university"
+                    {{ request()->institution_type == 'university' ? 'selected' : '' }}
+                >
+                  Университет
+                </option>
+            </select>
+        </div>
 
       <div class="three wide field" style="margin-top: 7px;">
         <div class="ui checkbox">
