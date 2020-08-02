@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Institution;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\KeyboardLayoutConverter;
 use App\Models\City\City;
-use App\Models\Institution\{
-    Institution,
-    ReceptionCommittee
-};
+use App\Models\Institution\Institution;
 use App\Models\User\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\Institution\{
     InstitutionFormRequest
 };
@@ -146,7 +143,14 @@ class InstitutionsController extends Controller
                 'slug as url', "title", 'abbreviation as description', 'city_id', 'type'
             )
             ->ofType($institutionType)
-            ->like($request->input('query'))
+            ->where(function ($q) use ($request) {
+                $q->like($request->input('query'))
+                    ->orWhere(function ($q) use ($request) {
+                        $q->like(
+                            KeyboardLayoutConverter::convert($request->input('query'))
+                        );
+                    });
+            })
             ->orderBy('title')
             ->get();
 
