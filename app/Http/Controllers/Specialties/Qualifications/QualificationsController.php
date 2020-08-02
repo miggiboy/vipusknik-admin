@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Specialties\Qualifications;
 
-use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
+use App\KeyboardLayoutConverter;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\{
     Specialty\SpecialtyFormRequest
@@ -119,7 +119,14 @@ class QualificationsController extends Controller
     {
         $qualifications = Specialty::select('slug as url', 'title', 'code as description')
             ->getOnly('qualifications')
-            ->like($request->input('query'))
+            ->where(function ($q) use ($request) {
+                $q->like($request->input('query'))
+                    ->orWhere(function ($q) use ($request) {
+                        $q->like(
+                            KeyboardLayoutConverter::convert($request->input('query'))
+                        );
+                    });
+            })
             ->orderBy('title')
             ->get();
 

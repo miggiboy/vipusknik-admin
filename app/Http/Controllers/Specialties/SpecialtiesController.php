@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers\Specialties;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use App\Models\Subject\Subject;
-
-use App\Models\Specialty\{
-    SpecialtyDirection,
-    Specialty
-};
-
+use App\KeyboardLayoutConverter;
 use App\Models\Institution\Institution;
+use App\Models\Specialty\Specialty;
+use App\Models\Specialty\SpecialtyDirection;
+use App\Models\Subject\Subject;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\Specialty\{
     SpecialtyFormRequest
@@ -186,7 +182,14 @@ class SpecialtiesController extends Controller
         $specialties = Specialty::select('slug as url', 'title', 'code as description')
             ->getOnly('specialties')
             ->of($institutionType)
-            ->like($request->input('query'))
+            ->where(function ($q) use ($request) {
+                $q->like($request->input('query'))
+                    ->orWhere(function ($q) use ($request) {
+                        $q->like(
+                            KeyboardLayoutConverter::convert($request->input('query'))
+                        );
+                    });
+            })
             ->orderBy('title')
             ->get();
 

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Professions;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\KeyboardLayoutConverter;
+use Illuminate\Http\Request;
 
 use App\Models\Profession\{
     Profession,
@@ -122,7 +123,14 @@ class ProfessionsController extends Controller
     public function rtSearch(Request $request){
 
         $professions = Profession::select('slug as url', "title")
-            ->like($request->input('query'))
+            ->where(function ($q) use ($request) {
+                $q->like($request->input('query'))
+                    ->orWhere(function ($q) use ($request) {
+                        $q->like(
+                            KeyboardLayoutConverter::convert($request->input('query'))
+                        );
+                    });
+            })
             ->orderBy('title')
             ->get();
 

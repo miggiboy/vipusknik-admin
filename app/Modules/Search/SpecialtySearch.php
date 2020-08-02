@@ -2,8 +2,9 @@
 
 namespace App\Modules\Search;
 
-use Illuminate\Http\Request;
+use App\KeyboardLayoutConverter;
 use App\Models\Specialty\Specialty;
+use Illuminate\Http\Request;
 
 class SpecialtySearch
 {
@@ -14,7 +15,14 @@ class SpecialtySearch
         $q->getOnly($type)->of($request->route('institutionType') ?? 'college');
 
         if ($request->has('query')) {
-            $q->like(request('query'));
+            $q->where(function ($q) {
+                $q->like(request()->input('query'))
+                    ->orWhere(function ($q) {
+                        $q->like(
+                            KeyboardLayoutConverter::convert(request()->input('query'))
+                        );
+                    });
+            });
         }
 
         if ($request->has('direction')) {

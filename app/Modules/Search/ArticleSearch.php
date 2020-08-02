@@ -2,6 +2,7 @@
 
 namespace App\Modules\Search;
 
+use App\KeyboardLayoutConverter;
 use App\Models\Article\Article;
 
 class ArticleSearch
@@ -11,7 +12,14 @@ class ArticleSearch
         $q = Article::query();
 
         if ($request->has('query')) {
-            $q->like(request('query'));
+            $q->where(function ($q) {
+                $q->like(request()->input('query'))
+                    ->orWhere(function ($q) {
+                        $q->like(
+                            KeyboardLayoutConverter::convert(request()->input('query'))
+                        );
+                    });
+            });
         }
 
         if ($request->has('category')) {
