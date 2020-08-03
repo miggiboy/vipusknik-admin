@@ -1,9 +1,9 @@
 <?php
 
 // use App\Models\User\User;
-// 
+
 // Route::get('/test', function () {
-    // auth()->login(User::first());
+//     auth()->login(User::first());
 // });
 
 Route::get('/regions', 'RegionsController@index')->name('regions.index');
@@ -221,6 +221,8 @@ Route::resource('cities', 'CitiesController', [
  */
 
 Route::group(['namespace' => 'Institution', 'prefix' => '/institutions'], function () {
+    Route::get('/{institution}/related-institutions/create', 'RelatedInstitutionsController@create')->name('related-institutions.create');
+    Route::post('/{institution}/related-institutions', 'RelatedInstitutionsController@store')->name('related-institutions.store');
 
     /**
      * Institution Paid Status

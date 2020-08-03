@@ -58,7 +58,16 @@
 
   <div class="six wide column">
     <div class="row">
-      @include ('institutions/partials/show/_institution_specialties')
+        <div class="ui segment">
+          <h2 class="ui header">
+            Связанные уч. заведения
+            @foreach ($institution->relatedInstitutions as $institution)
+                {{ $institution->title }}
+            @endforeach
+            <a href="{{ route('related-institutions.create', $institution) }}">Добавить</a>
+          </h2>
+        </div>
+        @include ('institutions/partials/show/_institution_specialties')
     </div>
     <br>
   </div>
