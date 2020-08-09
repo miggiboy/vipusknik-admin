@@ -61,11 +61,32 @@
         <div class="ui segment">
           <h2 class="ui header">
             Связанные уч. заведения
-            @foreach ($institution->relatedInstitutions as $institution)
-                {{ $institution->title }}
-            @endforeach
-            <a href="{{ route('related-institutions.create', $institution) }}">Добавить</a>
           </h2>
+          @foreach ($institution->relatedInstitutions as $relatedInstitution)
+              <div style="display: flex !important; align-items: center; justify-content: space-between; margin-bottom: 1rem">
+                  <span>{{ $relatedInstitution->title }}</span>
+                  <form action="{{ route('related-institutions.delete', $institution) }}" method="post">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                      <input type="hidden" name="related_institution" value="{{ $relatedInstitution->id }}">
+                      <button type="submit">x</button>
+                  </form>
+              </div>
+          @endforeach
+
+          @foreach ($institution->dependentInstitutions as $relatedInstitution)
+              <div style="display: flex !important; align-items: center; justify-content: space-between; margin-bottom: 1rem">
+                  <span>{{ $relatedInstitution->title }}</span>
+                  <form action="{{ route('related-institutions.delete', $institution) }}" method="post">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                      <input type="hidden" name="related_institution" value="{{ $relatedInstitution->id }}">
+                      <button type="submit">x</button>
+                  </form>
+              </div>
+          @endforeach
+
+          <a href="{{ route('related-institutions.create', $institution) }}">Добавить</a>
         </div>
         @include ('institutions/partials/show/_institution_specialties')
     </div>

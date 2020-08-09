@@ -160,8 +160,13 @@ class Institution extends Model implements HasMediaConversions
         return $this->hasOne(Map::class);
     }
 
-    public function relatedInstitutions()
+    public function dependentInstitutions()
     {
         return $this->belongsToMany(static::class, 'related_institutions', 'institution_id', 'related_institution_id');
+    }
+
+    public function relatedInstitutions()
+    {
+        return $this->belongsToMany(static::class, 'related_institutions', 'related_institution_id', 'institution_id');
     }
 }

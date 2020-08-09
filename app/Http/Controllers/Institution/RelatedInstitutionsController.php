@@ -21,4 +21,17 @@ class RelatedInstitutionsController extends Controller
 
         return redirect()->route('institutions.show', [ $institution->type, $institution ]);
     }
+
+    public function delete(Institution $institution)
+    {
+        $institution->relatedInstitutions()
+            ->wherePivot('institution_id', request()->related_institution)
+            ->detach();
+
+        $institution->dependentInstitutions()
+            ->wherePivot('related_institution_id', request()->related_institution)
+            ->detach();
+
+        return redirect()->route('institutions.show', [ $institution->type, $institution ]);
+    }
 }

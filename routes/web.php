@@ -223,6 +223,7 @@ Route::resource('cities', 'CitiesController', [
 Route::group(['namespace' => 'Institution', 'prefix' => '/institutions'], function () {
     Route::get('/{institution}/related-institutions/create', 'RelatedInstitutionsController@create')->name('related-institutions.create');
     Route::post('/{institution}/related-institutions', 'RelatedInstitutionsController@store')->name('related-institutions.store');
+    Route::delete('/{institution}/related-institutions', 'RelatedInstitutionsController@delete')->name('related-institutions.delete');
 
     /**
      * Institution Paid Status
