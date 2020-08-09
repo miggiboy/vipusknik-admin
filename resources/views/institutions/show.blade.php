@@ -64,7 +64,7 @@
           </h2>
           @foreach ($institution->relatedInstitutions as $relatedInstitution)
               <div style="display: flex !important; align-items: center; justify-content: space-between; margin-bottom: 1rem">
-                  <span>{{ $relatedInstitution->title }}</span>
+                  <a href="{{ route('institutions.show', [ $relatedInstitution->type, $relatedInstitution ]) }}">{{ $relatedInstitution->title }}</a>
                   <form action="{{ route('related-institutions.delete', $institution) }}" method="post">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
@@ -76,7 +76,7 @@
 
           @foreach ($institution->dependentInstitutions as $relatedInstitution)
               <div style="display: flex !important; align-items: center; justify-content: space-between; margin-bottom: 1rem">
-                  <span>{{ $relatedInstitution->title }}</span>
+                  <a href="{{ route('institutions.show', [ $relatedInstitution->type, $relatedInstitution ]) }}">{{ $relatedInstitution->title }}</a>
                   <form action="{{ route('related-institutions.delete', $institution) }}" method="post">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
