@@ -60,7 +60,7 @@ class Institution extends Model implements HasMediaConversions
     const SOCIAL_MEDIA_SITES = [
         'vk',
         'facebook',
-        'twitter',
+        'telegram',
         'instagram'
     ];
 
